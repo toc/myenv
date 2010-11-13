@@ -9,8 +9,4 @@
 #   [ -f ~/.bash_profle.self ] && . ~/.bash_profle.self
 # 
 
-# PS1: command line prompt
-if [ "$TERM" == "emacs" ]; then
-  PS1='$ '; export PS1;
-fi
 
