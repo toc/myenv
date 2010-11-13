@@ -7,7 +7,7 @@
 #   .bashrcから次の様にインポートして利用されることを想定。
 # 
 #   ### Import external resource file
-#   [ -r "~/self.bashrc" ] && . ~/self.bashrc
+#   [ -f ~/.bashrc.self ] && . ~/.bashrc.self
 # 
 
 # Aliases
@@ -17,10 +17,13 @@
 alias ssh-set='eval `ssh-agent`; ssh-add'
 
 # short name of Emacs 
+# MUST be added each executable file path to `PATH'
 if [ `uname -o` == "Cygwin" ]; then
     alias e='meadow'
+    alias E='meadow'
 else
     alias e='emacs'
+    alias E='emacs'
 fi
 
 # Set up command-line prompt

@@ -1,0 +1,11 @@
+[user]
+	name = T.Tanaka
+	email = toc@yan.ne.jp
+[color]
+	ui = auto
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	amend = commit --amend -C HEAD

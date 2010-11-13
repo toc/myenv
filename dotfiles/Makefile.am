@@ -1,4 +1,4 @@
-dist_noinst_DATA=bash_profile.self bashrc.self
+dist_noinst_DATA=bash_profile.self bashrc.self gitconfig
 install-data-local:
 	@test -z "$(dist_noinst_DATA)" || for i in $(dist_noinst_DATA); do \
 	  echo "$(INSTALL_DATA) $$i $(prefix)/.$$i"; \

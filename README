@@ -9,10 +9,11 @@
   詳細な説明は各ファイルの冒頭に記載するものとし、
   ここでは各ファイルの内容を一行程度で概説する。
   できるだけカテゴリごとに分類し、リストを更新する。
-** bash
+** dotfiles
    - bash_profile.self: .bash_profileインポート(主に環境変数)
    - bashrc.self: .bashrcからインポート(上記以外)
    - bashrc.special: 汎用的ではないが有用な小物設定格納庫
+   - gitconfig: gitコマンドのglobal設定内容
 
 ** その他
   
