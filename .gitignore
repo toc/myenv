@@ -1,0 +1,17 @@
+COPYING
+INSTALL
+aclocal.m4
+autom4te.cache
+install-sh
+missing
+myenv-*
+
+configure
+config.log
+config.status
+
+Makefile
+Makefile.in
+
+dotfiles/Makefile
+dotfiles/Makefile.in
