@@ -16,4 +16,5 @@ dnl lispdir="$lispdir/anthy"
 
 AC_OUTPUT(Makefile
  dotfiles/Makefile
+ cfgfiles/Makefile
  )

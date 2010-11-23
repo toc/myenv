@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS =
 EXTRA_DIST = README
-SUBDIRS = dotfiles
+SUBDIRS = dotfiles cfgfiles
 
 #sysconf_DATA = anthy-conf
 #pkgconfigdir = $(libdir)/pkgconfig
