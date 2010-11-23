@@ -9,3 +9,7 @@
 	st = status
 	br = branch
 	amend = commit --amend -C HEAD
+	diff1 = diff HEAD^..HEAD
+	di1 = diff HEAD^..HEAD
+	log1 = log --name-status HEAD^..HEAD
+	lg1 = log --name-status HEAD^..HEAD
