@@ -13,3 +13,5 @@
 	di1 = diff HEAD^..HEAD
 	log1 = log --name-status HEAD^..HEAD
 	lg1 = log --name-status HEAD^..HEAD
+	log2 = log --name-status HEAD~2..HEAD
+	lg2 = log --name-status HEAD~2..HEAD
