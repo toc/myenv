@@ -21,11 +21,19 @@
    アプリケーションごとの設定ファイルを配置する。
    詳細は cfgfiles/README を参照のこと。
 
+** dictool
+   個人辞書の操作に関連するツール群を配置する。
+   辞書そのものは内容に機微なものが含まれる可能性が
+   あるものはここでは管理しないよう注意する。
+   フリー配布の辞書本体などはこの限りではない。
+   - anthy2gji.*: Anthyの個人辞書をGoogle日本語入力の
+     辞書として使えるようにするための関連ツール群。
+
 ** その他
   
 
 * Local Variables
-;;; Local Variables: ;;;
-;;; mode: org ;;;
-;;; coding: utf-8 ;;;
-;;; End: ;;;
+# Local Variables: ;
+# mode: org ;
+# coding: utf-8 ;
+# End: ;

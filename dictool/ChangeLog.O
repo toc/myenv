@@ -1,0 +1,25 @@
+2010-11-12  T.Tanaka <toc@yan.ne.jp>
+
+	* README, anthy2/anthy2gji.rb, anthy2/anthy2gji.yml,
+	anthy2/anthy2ime.rb, anthy2/anthy2ime.yml: 構成変更.  anthy辞書から
+	の変換ツールは anthy2 以下に移動.  READMEファイルの属性見直し
+
+2010-11-12  T.Tanaka <toc@yan.ne.jp>
+
+	* anthy2ime.rb: Refresh anthy2ime.rb.  Remove coding cookie.  Some
+	BUG-Fix.
+
+2010-11-12  T.Tanaka <toc@yan.ne.jp>
+
+	* sample/ime2canna.pl, sample/kao.rb: Some fix in sample/*.  And
+	add coding cookie.
+
+2010-11-12  T.Tanaka <toc@yan.ne.jp>
+
+	* anthy2gji.rb, anthy2gji.yml: Re-clean source.  Don't use NKF.
+	Don't use multi-byte chars (in comment).  Some BUG-Fix.
+
+2010-11-11  T.Tanaka <toc@yan.ne.jp>
+
+	* Initial import.
+
