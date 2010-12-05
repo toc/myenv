@@ -9,9 +9,17 @@ myenv-*
 configure
 config.log
 config.status
+config.sub
+config.guess
 
 Makefile
 Makefile.in
+*/Makefile
+*/Makefile.in
 
-dotfiles/Makefile
-dotfiles/Makefile.in
+dotfiles/.*
+
+dictool/anthy2gji
+dictool/anthy2gji.sh
+dictool/anthy2gji.rb
+

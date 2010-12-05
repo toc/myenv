@@ -1,0 +1,11 @@
+#! /bin/sh
+
+if test x@RUBY@ != x; then
+    yamlfile=@pkgdatadir@/anthy2gji.yml;
+    rbfile=@bindir@/anthy2gji.rb;
+
+    @RUBY@ ${rbfile} --hinsi-table=${yamlfile};
+else
+    echo "!! No RUBY found.  STOP.";
+    exit 255;
+fi

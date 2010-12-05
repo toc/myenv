@@ -1,15 +1,41 @@
-#!ruby
+#! @RUBY@
 require 'yaml'
 
 ### Constants
 debug = false
-tableName = "anthy2gji.yml"
+@tableName = "@pkgdatadir@/anthy2gji.yml"
+
+### Subroutine
+def usage ( do_exit = true )
+  STDERR .print "usage: #{$0} [options]
+  Convert from private anthy dictionary (private_words_default format)
+  to plain text format (Google Japanese Input importable!).
+  Now, INPUT must be stdin, and OUTPUT is stdout ONLY.
+  --help               show this message.
+  --hinsi-table=TABLE  Use file TABLE as hinsi-table.
+                       (default: #{@tableName}).
+  --dump-table         Dump hinsi-talbe and exit (not implemented yet).\n"
+  exit if do_exit
+end
+
+### Parse command-line options.
+while option = ARGV .shift
+  case (option)
+  when /^--hinsi-table=(.+)/
+    @tableName = $1
+  when /--dump-table/
+    # TODO: Imprement.
+    usage()
+  else
+    usage()
+  end
+end
 
 ### Import HINSHI table
 begin
-  yaml = YAML::load_file( tableName )
+  yaml = YAML::load_file( @tableName )
 rescue
-  STDERR .print "!! Cannot load #{tableName}!!"
+  STDERR .print "!! Cannot load #{@tableName} !!"
   exit -1
 end
 
