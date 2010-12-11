@@ -4,14 +4,14 @@
 [color]
 	ui = auto
 [alias]
+	diff = diff -w
 	co = checkout
 	ci = commit
 	st = status
 	br = branch
+	lg = log --oneline
+	di = diff --name-status
 	amend = commit --amend -C HEAD
-	diff1 = diff HEAD^..HEAD
-	di1 = diff HEAD^..HEAD
-	log1 = log --name-status HEAD^..HEAD
 	lg1 = log --name-status HEAD^..HEAD
-	log2 = log --name-status HEAD~2..HEAD
 	lg2 = log --name-status HEAD~2..HEAD
+	di1 = diff -w HEAD^..HEAD
