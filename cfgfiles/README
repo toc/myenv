@@ -32,8 +32,13 @@
     V3.98
     - i_view32.ini
 *** Google日本語入力(GJI)
+    一部で『ぐぐえり』と呼ばれているらしい。
     - romantab
       ローマ字入力の変換ルールテーブル。
+      - 一文字の「う゛」が機種依存文字のため片仮名で代用
+      - ここ↓を参考に標準で未実装の『z+α』マッピングを追加
+	TODO: 日本語キーボード用にマッピングを見直す
+	http://blog.as-is.net/2009/12/google-tamago.html
     - keymap
       キー設定用ルールーテーブル。
       ことえりベースでeggライクなマッピングを作成。
@@ -43,7 +48,7 @@
 
 
 * Local Variables
-;;; Local Variables: ;;;
-;;; mode: org ;;;
-;;; coding: utf-8 ;;;
-;;; End: ;;;
+# Local Variables:
+# mode: org
+# coding: utf-8
+# End:
