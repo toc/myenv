@@ -1,0 +1,62 @@
+;;; -*-Emacs-Lisp-*-
+
+;; ELS-ELS: list of private modules to install
+
+;;; Code:
+
+(setq make-els/module-alist
+      '(;; list of SYMBOL and CONDITION
+	(init	      . t)
+	(init-@emacs_short@     . t)	; Add emacsen dependent files.
+	(emacs-bugs   . t)
+	(cust-def     . t)
+	(emacs19      . (= emacs-major-version 19))
+	(_bbdb	      . (locate-library "bbdb"))
+	(_browse-url  . t)
+	(_c-sig       . (or (locate-library "csig")
+			    (locate-library "c-sig")))
+	(_ccc	      .   (or (locate-library "ccc")
+			      (locate-library "ccc-self")))
+	(_develock    . (or (locate-library "develock")
+			    (file-exists-p "util/develock.el")))
+	(_diff	      . (locate-library "diff-mode"))
+	(_dispicon    . (and (exec-installed-p "dispicon.exe")
+			     (exec-installed-p "dropfile.exe")
+			     (locate-library "dispicon")
+			     (locate-library "dropfile")))
+	(_elpoint     . (locate-library "ept"))
+	(_frame-setup . t)
+	(_htmlize     . (or (locate-library "htmlize")
+			    (file-exists-p "util/htmlize.el")))
+	(_jde	      . t)
+	(_major-mode  . t)
+	(_mhc	      . (locate-library "mhc"))
+	(_migemo      . (locate-library "migemo"))
+	(_misc	      . t)
+	(_lookup      . (locate-library "lookup"))
+	(_mule	      . (featurep 'mule))
+	(_org	      . (locate-library "org"))
+	(_pobox	      . t)
+	(_psvn	      . (and (locate-library "psvn")
+			     (exec-installed-p "svn")))
+	(_ps-print    . (and (not (>= emacs-major-version 22))
+			     (locate-library "ps-print")
+			     (locate-library "ps-mule")))
+;;	(_rail	      . (locate-library "rail"))
+	(_remix       . (locate-library "egg-remix"))
+	(_sdic	      . (and (locate-library "sdic")
+					; for sufary 2.1.1
+			     (exec-installed-p "array")))
+	(_semi	       . (locate-library "semi-setup"))
+	(_ssh	       . (exec-installed-p "ssh"))
+	(_super-smart-find . (locate-library "smart-find"))
+	(_twitter     . t)
+	(_w3m	      . (and (locate-library "w3m")
+			     (exec-installed-p "w3m")))
+	(_widget      . t)
+	(_wiki	      . t)
+	(_windows     . (and (locate-library "windows")
+			     (locate-library "revive")))
+	))
+
+;;; ELS-ELS ends here

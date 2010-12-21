@@ -1,0 +1,172 @@
+;;; -*-Emacs-Lisp-*-
+
+;; ELS-MK: installer for ELS.
+
+;;; Code:
+(defun config-els (&optional noecho)
+  (let (prefix lisp-dir version-specific-lisp-dir)
+    (and (setq prefix (car command-line-args-left))
+	 (or (string-equal "NONE" prefix)
+	     (defvar PREFIX prefix)))
+    (setq command-line-args-left (cdr command-line-args-left))
+    (and (setq lisp-dir (car command-line-args-left))
+	 (or (string-equal "NONE" lisp-dir)
+	     (defvar LISPDIR lisp-dir)))
+    (setq command-line-args-left (cdr command-line-args-left))
+    (and (setq version-specific-lisp-dir (car command-line-args-left))
+	 (or (string-equal "NONE" version-specific-lisp-dir)
+	     (progn
+	       (defvar VERSION_SPECIFIC_LISPDIR version-specific-lisp-dir)
+	       (or noecho
+		   (princ (format "VERSION_SPECIFIC_LISPDIR=%s\n"
+				  VERSION_SPECIFIC_LISPDIR))))))
+    (setq command-line-args-left (cdr command-line-args-left))
+    (load-file "ELS-CFG")
+    (load-file "ELS-ELS")
+    (or noecho
+	(princ (format "PREFIX=%s\nLISPDIR=%s\n" PREFIX LISPDIR)))))
+
+(defvar make-els/source-directory ".")
+(defvar make-els/debug nil)
+
+(defun make-els/list-modules (&optional nocheck)
+  "Make elisp file list.
+List up all modules if NOCHECK is non-nil, otherwise list files with
+good condition."
+  (if (not (boundp 'make-els/module-alist))
+      ;; config-els is not executed.
+      (error "!! ELS-ELS does not exist?")
+    (delq nil
+	  (if nocheck
+	      (mapcar (lambda (x)
+			(symbol-name (car x)))
+		      make-els/module-alist)
+	    (mapcar (lambda (x)
+		      (if (eval (cdr x))
+			  (symbol-name (car x))))
+		    make-els/module-alist)))))
+
+(defun compile-els ()
+  (config-els)
+  ;; Delete old *.elc files.
+  (mapcar
+   (lambda (module)
+     (let ((el-file  (expand-file-name (concat module ".el") make-els/source-directory))
+	   (elc-file (expand-file-name (concat module ".elc") make-els/source-directory)))
+       (if (and (file-exists-p elc-file)
+		(file-newer-than-file-p el-file elc-file))
+	   (delete-file elc-file))))
+   (mapcar (lambda (x)
+	     (symbol-name (car x)))
+	   make-els/module-alist))
+  ;; Byte compile all *.el files.
+  (mapcar
+   (lambda (module)
+     (let ((el-file  (expand-file-name (concat module ".el") make-els/source-directory))
+	   (elc-file (expand-file-name (concat module ".elc") make-els/source-directory)))
+       (if (or (not (file-exists-p elc-file))
+	       (if (file-newer-than-file-p el-file elc-file)
+		   (progn
+		     (delete-file elc-file)
+		     t)))
+	   (if make-els/debug
+	       (princ (format "Byte compile: %s -> %s.\n"
+			      (file-name-nondirectory el-file)
+			      (file-name-nondirectory elc-file)))
+	     (byte-compile-file el-file)))))
+   (delq nil
+	 (mapcar (lambda (pair)
+		   (if (eval (cdr pair))
+		       (symbol-name (car pair))))
+		 make-els/module-alist))))
+
+(defun make-els/make-directory (dirname)
+  (if (file-directory-p dirname)
+      t
+    (if (make-els/make-directory
+	 (directory-file-name (file-name-directory (directory-file-name dirname))))
+	(progn
+	  (make-directory dirname)
+	  t))))
+
+(defun make-els/install-file (in-file out-file)
+  (if (file-exists-p in-file)
+      (progn
+	(princ (format "%s%s -> %s\n"
+		       (if make-els/debug "Install: " "")
+		       (file-name-nondirectory in-file) out-file))
+	(or make-els/debug
+	    (progn
+	      (if (file-exists-p out-file)
+		  (delete-file out-file))
+	      (copy-file in-file out-file t t))))))
+
+(defvar make-els/lisp-directory ".")
+(defvar make-els/install-els nil)
+
+(defun list-elcs ()
+  (config-els 'noecho)
+  (princ
+   (mapconcat (lambda (x) (concat x ".elc"))
+	      (make-els/list-modules) "\n")))
+
+(defun install-els ()
+  (compile-els)
+  (setq make-els/lisp-directory ELS_DIR)
+  (or make-els/debug
+      (progn
+	(make-els/make-directory
+	 (expand-file-name "." make-els/lisp-directory))
+	))
+  (mapcar
+   (lambda (module)
+     (and make-els/install-els
+	  (make-els/install-file
+	   (expand-file-name (concat module ".el") make-els/source-directory)
+	   (expand-file-name (concat module ".el") make-els/lisp-directory)))
+     (make-els/install-file
+      (expand-file-name (concat module ".elc") make-els/source-directory)
+      (expand-file-name (concat module ".elc") make-els/lisp-directory)))
+   (mapcar (lambda (x)
+	     (symbol-name (car x)))
+	   make-els/module-alist)))
+
+(defun config-els-package ()
+  (let (package-dir)
+    (and (setq package-dir (car command-line-args-left))
+	 (or (string= "NONE" package-dir)
+	     (defvar PACKAGEDIR package-dir)
+	     ))
+    (setq command-line-args-left (cdr command-line-args-left))
+    (load-file "ELS-CFG")
+    (load-file "ELS-ELS")
+    (setq els-modules (append els-modules
+			       '(auto-autoloads custom-load)))
+    (princ (format "PACKAGEDIR=%s\n" PACKAGEDIR))
+    ))
+
+(defun compile-els-package ()
+  (config-els-package)
+
+  (setq autoload-package-name "els")
+  (add-to-list 'command-line-args-left ".")
+  (batch-update-directory)
+
+  (add-to-list 'command-line-args-left ".")
+  (Custom-make-dependencies)
+
+  (compile-elisp-modules els-modules ".")
+  )
+
+(defun install-els-package ()
+  (config-els-package)
+  (install-elisp-modules els-modules
+			 "./"
+			 (expand-file-name ELS_PREFIX
+					   (expand-file-name "lisp"
+							     PACKAGEDIR)))
+  (delete-file "./auto-autoloads.el")
+  (delete-file "./custom-load.el")
+  )
+
+;;; ELS-MK ends here
