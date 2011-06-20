@@ -29,6 +29,6 @@ fi
 # Set up command-line prompt
 # ##########################
 # PS1: command line prompt
-if [ "$TERM" == "emacs" ]; then
-  PS1='$ '; export PS1;
-fi
+# if [ "$TERM" == "emacs" ]; then
+#   PS1='$ '; export PS1;
+# fi
