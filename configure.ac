@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT(dotfiles/bashrc.self)
 AC_PREFIX_DEFAULT(${HOME})
 
-AM_INIT_AUTOMAKE(myenv, 0.2)
+AM_INIT_AUTOMAKE(myenv, 0.3a)
 AM_PATH_LISPDIR
 
 dnl Checks for programs.
