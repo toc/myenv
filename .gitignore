@@ -4,7 +4,10 @@ aclocal.m4
 autom4te.cache
 install-sh
 missing
+elisp-comp
 myenv-*
+*~
+*/*~
 
 configure
 config.log
@@ -23,3 +26,7 @@ dictool/anthy2gji
 dictool/anthy2gji.sh
 dictool/anthy2gji.rb
 
+emacs-lisp/*.elc
+emacs-lisp/elc-stamp
+emacs-lisp/em
+emacs-lisp/ELS-MK

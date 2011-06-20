@@ -1,0 +1,24 @@
+;;; -*-Emacs-Lisp-*-
+
+;; ELS-ELS: list of private modules to install
+
+;;; Code:
+
+(setq make-els/module-alist
+      '(;; list of SYMBOL and CONDITION
+	(init	      . t)
+	(init-user    . t)
+	;;;
+	(CJK-utf8     . t)
+	(color-theme  . t)
+;;	(_develock    . (or (locate-library "develock")
+;;			    (file-exists-p "util/develock.el")))
+	(_diff	      . (locate-library "diff-mode"))
+;;	(_migemo      . (locate-library "migemo"))
+	(_org	      . (locate-library "org"))
+	(_psvn	      . (and (locate-library "psvn")
+			     (exec-installed-p "svn")))
+;;	(_ssh	       . (exec-installed-p "ssh"))
+	))
+
+;;; ELS-ELS ends here

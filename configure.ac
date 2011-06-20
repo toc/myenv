@@ -3,6 +3,7 @@ AC_INIT(dotfiles/bashrc.self)
 AC_PREFIX_DEFAULT(${HOME})
 
 AM_INIT_AUTOMAKE(myenv, 0.2)
+AM_PATH_LISPDIR
 
 dnl Checks for programs.
 AC_CYGWIN
@@ -16,4 +17,7 @@ AC_OUTPUT(Makefile
  dotfiles/Makefile
  cfgfiles/Makefile
  dictool/Makefile
+ emacs-lisp/Makefile
+ emacs-lisp/ELS-MK
+ emacs-lisp/em
  )

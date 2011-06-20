@@ -1,4 +1,4 @@
-dist_noinst_DATA=bash_profile.self bashrc.self gitconfig
+dist_noinst_DATA=bash_profile.self bashrc.self gitconfig emacs.el
 
 all-am:
 	@test -z "$(dist_noinst_DATA)" || for i in $(dist_noinst_DATA); do \
