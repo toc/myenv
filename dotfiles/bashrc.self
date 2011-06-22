@@ -15,20 +15,12 @@
 
 # set ssh passphrase automatically
 alias ssh-set='eval `ssh-agent`; ssh-add'
+alias ls='ls -F --color=auto';		# Re-define: never use -h
 
-# short name of Emacs 
-# MUST be added each executable file path to `PATH'
-if [ `uname -o` == "Cygwin" ]; then
-    alias e='meadow'
-    alias E='meadow'
-else
-    alias e='emacs'
-    alias E='emacs'
+if [ "$TERM" == "emacs" ]; then
+  alias ls='ls -F --color';
 fi
 
-# Set up command-line prompt
-# ##########################
-# PS1: command line prompt
-# if [ "$TERM" == "emacs" ]; then
-#   PS1='$ '; export PS1;
-# fi
+# Set prompt
+# ##########
+PS1='\n\[\e[32m\]\u@\h \[\e[33m\]\w\[\e[0m\]\n\$ '
