@@ -3,6 +3,10 @@
 	email = toc@yan.ne.jp
 [color]
 	ui = auto
+	status = always
+	diff = always
+	branch = always
+	interactive = always
 [alias]
 	diff = diff -w
 	co = checkout
