@@ -1,4 +1,15 @@
 #!/bin/sh
 # -*- Mode: sh -*-
 
-@EMACS@ $* &
+## Set default parameter
+OPT='-f wl -f mhc-calendar';
+
+## Clear default parameter if ARG1 is `--'.
+if [ "$1" == "--" ]; then
+  OPT='';
+  shift 1;
+fi
+## Append ARGs of this command.
+OPT="$OPT $*"
+
+@EMACS@ $OPT &
