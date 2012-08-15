@@ -1,21 +1,23 @@
 [user]
-	name = T.Tanaka
 	email = toc@yan.ne.jp
+	name = T.Tanaka
 [color]
-	ui = auto
-	status = always
-	diff = always
 	branch = always
+	diff = always
 	interactive = always
+	status = always
+	ui = auto
 [alias]
-	diff = diff -w
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
-	lg = log --oneline
-	di = diff --name-status
 	amend = commit --amend -C HEAD
+	br = branch
+	ci = commit
+	co = checkout
+	di = diff --name-status
+	di1 = diff -w HEAD^..HEAD
+	diff = diff -w
+	lg = log --oneline
 	lg1 = log --name-status HEAD^..HEAD
 	lg2 = log --name-status HEAD~2..HEAD
-	di1 = diff -w HEAD^..HEAD
+	sb = show-branch
+	st = status
+
