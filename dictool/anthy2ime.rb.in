@@ -1,0 +1,72 @@
+#! @RUBY@
+require 'yaml'
+require 'nkf'
+
+### Constant
+@tableName = "@pkgdatadir@/anthy2ime.yml"
+
+### Subroutine
+def usage ( do_exit = true )
+  STDERR .print "usage: #{$0} [options]
+  Convert from private anthy dictionary (private_words_default format)
+  to plain text format (for Microsoft IME).
+  Now, INPUT must be stdin, and OUTPUT is stdout ONLY.
+  --help               show this message.
+  --hinsi-table=TABLE  Use file TABLE as hinsi-table.
+                       (default: #{@tableName}).
+  --dump-table         Dump hinsi-talbe and exit (not implemented yet).\n"
+  exit if do_exit
+end
+
+### Parse command-line options.
+while option = ARGV .shift
+  case (option)
+  when /^--hinsi-table=(.+)/
+    @tableName = $1
+  when /--dump-table/
+    # TODO: Imprement.
+    usage()
+  else
+    usage()
+  end
+end
+
+### Import HINSHI table
+begin
+  yaml = YAML::load_file( @tableName )
+rescue
+  STDERR .print '!! Cannot load #{@tableName}}!!'
+end
+
+#STDERR .print yaml
+#p yaml['hinsi']
+#exit
+
+while line = gets
+  # assume input string was encoded as UTF-8.
+  line.chomp
+
+  if line =~ /^#/ then
+    reuslt = "!#{line}"
+  elsif line =~ /^([^ ]*) +#([^*]+)\*([0-9]+) +(.*)$/
+    # $1    $2    $3    $4
+    # Yomi #Hinsi*Hindo Tango
+    #STDERR .puts "#{$2} | #{yaml['hinsi'][$2]}"
+    #exit
+    hinsi = yaml['hinsi'][$2]
+    if hinsi .nil? then
+      STDERR .puts "Waning: #{$2} was falled back to DEFAULT."
+      hinsi = yaml['default'] 
+    end
+    #STDERR .puts "#{hinsi}"
+
+    result = $1 + "\t"
+    result = result + $4.gsub(/ /, "\\ ")
+    result = result + "\t#{hinsi}"
+  else
+    # Invalid entry
+    STDERR .puts NKF.nkf("-Ue","!! #{line}")
+    relust = ''
+  end
+  puts NKF.nkf("-Us", "#{result}") if result
+end

@@ -25,6 +25,9 @@ dotfiles/.*
 dictool/anthy2gji
 dictool/anthy2gji.sh
 dictool/anthy2gji.rb
+dictool/anthy2ime
+dictool/anthy2ime.rb
+dictool/anthy2ime.sh
 
 emacs-lisp/*.elc
 emacs-lisp/elc-stamp
